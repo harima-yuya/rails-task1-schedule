@@ -7,8 +7,10 @@ class Post < ApplicationRecord
     validate :start_end_check
 
     def start_end_check
-        if end_date < start_date
-            errors.add(:end_date,"終了日は開始日より後にして下さい")
-        end   
+        unless start_date.nil? || end_date.nil?
+            if end_date < start_date
+                errors.add(:end_date,"終了日は開始日より後にして下さい")
+            end    
+        end
     end
 end
